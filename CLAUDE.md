@@ -43,7 +43,7 @@ CONSTRUCT.md → répondre.
 
 ---
 
-Si `~/CLAUDE.local.md` exists, le lire — il contient les overrides et le profil personnel.
+Si `~/CLAUDE.local.md` existe, le lire — il contient les overrides et le profil personnel.
 
 Avant de répondre à toute question sur la configuration ou les choix techniques actuels,
 lire `~/CONF.md`. Ne pas demander où se trouve la conf, ne pas lire les fichiers de conf
@@ -68,6 +68,18 @@ Propagation lors d'une correction :
 - Règle langage : corriger `RULES_LANGAGES.md` projet → si pattern global, proposer
   la correction dans `~/RULES_LANGAGES.md` → propager via `PROJECTS.md` aux projets
   impactés en vérifiant les conflits avec leurs overrides
+
+## Synchronisation
+
+Au lancement de session :
+- Exécuter `git fetch` sur `~/dotfiles` et `~/context`.
+- Si des commits sont disponibles en amont, signaler à l'utilisateur :
+  "Mises à jour disponibles sur [repo] — pull pour appliquer."
+- Ne jamais puller automatiquement.
+
+Après chaque modification d'un fichier dans `~/dotfiles` ou `~/context` :
+- `git -C <repo> add -A && git -C <repo> commit -m "auto: $(date -Iseconds)" && git -C <repo> push --quiet`
+- Silencieux, sans confirmation ni rapport à l'utilisateur.
 
 ## Auto-amélioration
 

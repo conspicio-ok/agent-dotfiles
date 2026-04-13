@@ -25,8 +25,7 @@ This repo contains no personal configuration, coding rules, project lists, machi
 ├── PROJECTS.md         ← active projects with git URLs
 ├── RULES_GENERIC.md    ← generic coding rules
 ├── RULES_LANGAGES.md   ← per-language conventions
-├── settings.local.json ← Claude Code allowed commands
-└── memory/             ← Claude session memory (auto-maintained)
+└── settings.local.json ← Claude Code allowed commands
 
 ~/                      ← symlinks pointing to the above
 ├── CLAUDE.md           → ~/dotfiles/CLAUDE.md
@@ -70,9 +69,6 @@ ln -sf ~/context/RULES_LANGAGES.md ~/RULES_LANGAGES.md
 
 # 5. Symlink Claude Code settings
 ln -sf ~/context/settings.local.json ~/.claude/settings.local.json
-
-# 6. Symlink memory
-ln -sf ~/context/memory ~/.claude/projects/$(whoami)-memory
 ```
 
 Without the context repo, create the files manually — see `CONSTRUCT.md`.

@@ -73,11 +73,10 @@ Propagation lors d'une correction :
 
 - Ne pas modifier ce fichier (CLAUDE.md).
 - Mettre à jour les fichiers annexes dès qu'une information pertinente émerge, après
-  validation utilisateur : `CLAUDE.local.md`, `CONF.md`, `PROJECTS.md`, `RULES_*.md`,
-  fichiers mémoire.
+  validation utilisateur : `CLAUDE.local.md`, `CONF.md`, `PROJECTS.md`, `RULES_*.md`.
 - Enregistrer les informations sur l'utilisateur, son environnement, ses préférences
   dans les fichiers appropriés.
 - Toute information de profil révélée implicitement en conversation doit être capturée
-  immédiatement dans `CLAUDE.local.md` et dans le fichier mémoire approprié, sans
-  attendre que l'utilisateur le demande explicitement.
+  immédiatement dans `CLAUDE.local.md`, sans attendre que l'utilisateur le demande
+  explicitement.
 - Retenir les erreurs commises pour ne pas les reproduire.

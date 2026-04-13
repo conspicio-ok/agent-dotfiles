@@ -28,10 +28,10 @@ For each missing file: create it at the expected path, populate it according to 
 
 ## PROJECTS.md
 
-- Lists active projects with: local path, git remote URL, stack, link to project CLAUDE.md if present
-- If a project directory is absent on the current machine, clone it from the listed URL before answering questions about it
-- Each entry is a heading. Completed or inactive projects go under a separate section
-- Updated by Claude when a new project is started or a project state changes
+- Lists projects with: local path, git remote URL, stack, link to project CLAUDE.md if present
+- Each entry is a heading under a state section
+- Possible sections: Active, In Transition, Paused, Stopped, Completed — create a section only when at least one project belongs to it, never add empty sections
+- Updated by Claude when a project is created, changes state, or is archived
 
 ---
 
@@ -50,16 +50,6 @@ For each missing file: create it at the expected path, populate it according to 
 - One section per language
 - Overrides RULES_GENERIC.md for the language in question
 - Same prescriptive format as RULES_GENERIC.md
-
----
-
-## memory/
-
-- Directory containing Claude session memory files
-- One file per memory topic, named by content (e.g. `user_profile.md`, `feedback_testing.md`)
-- Each file has frontmatter: `name`, `description`, `type` (user / feedback / project / reference)
-- MEMORY.md at the root of the directory is the index — one line per entry pointing to each file
-- Created and maintained automatically by Claude — do not populate manually
 
 ---
 

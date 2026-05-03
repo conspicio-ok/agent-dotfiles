@@ -72,3 +72,16 @@ ln -sf ~/context/settings.local.json ~/.claude/settings.local.json
 ```
 
 Without the context repo, create the files manually — see `CONSTRUCT.md`.
+
+## Hermes Agent compatibility
+
+`CLAUDE.md` doubles as a `SOUL.md` for [Hermes Agent](https://github.com/NousResearch/hermes-agent) — the file is injected identically as the system prompt identity in both tools.
+
+Symlink after setting up Hermes:
+
+```bash
+ln -sf ~/dotfiles/CLAUDE.md ~/.hermes/SOUL.md
+ln -sf ~/dotfiles/CLAUDE.md ~/.hermes/profiles/local/SOUL.md  # if using a local profile
+```
+
+The symlinks ensure a single source of truth: editing `CLAUDE.md` updates the behavior of both Claude Code and Hermes simultaneously.

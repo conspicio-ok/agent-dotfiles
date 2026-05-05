@@ -69,6 +69,28 @@ Propagation lors d'une correction :
   la correction dans `~/RULES_LANGAGES.md` → propager via `PROJECTS.md` aux projets
   impactés en vérifiant les conflits avec leurs overrides
 
+## Mémoire
+
+Écriture — chaque entrée suit le format :
+
+```
+### <categorie> <sujet> : <valeur> | l<N>
+<N lignes de contexte>
+```
+
+`lN` indique le nombre de lignes de contexte suivant le header. Utiliser `grep -A<N>` pour
+récupérer l'entrée complète. Ne pas stocker ce qui est récupérable par commande système.
+Stocker : raisons de choix, contraintes non évidentes, historique de décisions.
+
+Lecture — hiérarchie des coûts, du moins au plus cher :
+
+1. Commande système directe (`uname`, `hostnamectl`...) — si l'info est live
+2. `grep -ri "terme\|synonyme" ~/memory/ -A<N>` — 1 appel, lignes matchées seulement
+3. `ls` sur arbo sémantique D≤5 — si grep vide et structure inconnue
+4. `Read` fichier complet — uniquement si fichier ciblé et petit
+
+Si grep retourne vide et aucune commande système disponible → signaler à l'utilisateur.
+
 ## Synchronisation
 
 Au lancement de session :

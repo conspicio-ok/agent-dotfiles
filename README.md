@@ -62,6 +62,7 @@ If using a private context repo:
 git clone git@github.com:<you>/context.git ~/context
 
 # 4. Symlink context files to home
+ln -sf ~/context/CLAUDE.local.md ~/CLAUDE.local.md
 ln -sf ~/context/CONF.md ~/CONF.md
 ln -sf ~/context/PROJECTS.md ~/PROJECTS.md
 ln -sf ~/context/RULES_GENERIC.md ~/RULES_GENERIC.md

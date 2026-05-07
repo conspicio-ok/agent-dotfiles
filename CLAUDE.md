@@ -56,6 +56,23 @@ Avant de générer du code, lire :
 - `~/RULES_GENERIC.md` — règles communes à tout le code
 - `~/RULES_LANGAGES.md` — conventions par langage
 
+## Memory (`~/memory/`)
+
+```
+memory/<categorie>/<note>.md   # kebab-case, date dans frontmatter
+```
+
+Créer une note : copier `~/memory/TEMPLATE.md`, renommer, remplir frontmatter.
+
+Recherche :
+```bash
+grep -r "terme" ~/memory/
+grep -rl "statut: brouillon" ~/memory/
+grep -r "domaines:.*physique" ~/memory/
+```
+
+Passer propre : compléter résumé + conclusion, `statut: propre`, mettre à jour `updated`.
+
 ## Mémoire
 
 Écriture — chaque entrée suit le format :

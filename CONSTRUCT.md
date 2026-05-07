@@ -53,6 +53,48 @@ For each missing file: create it at the expected path, populate it according to 
 
 ---
 
+## Memory (`~/memory/`)
+
+Vault de notes markdown. Catégories créées au besoin, sans taxonomie imposée.
+
+```
+memory/
+├── <categorie>/
+│   └── <note>.md
+├── TEMPLATE.md
+└── README.md
+```
+
+Nomenclature : kebab-case pour dossiers et fichiers. Pas de préfixe date — date dans frontmatter.
+
+Template (`TEMPLATE.md`) :
+
+```yaml
+---
+title: 
+domaines: []
+tags: []
+statut: brouillon   # brouillon | propre
+created:            # YYYY-MM-DD
+updated:            # YYYY-MM-DD
+changelog:
+  - date: 
+    note: 
+sources: []
+liens:
+  fichiers: []      # références internes — nom sans extension
+  titres: []        # références conceptuelles sans fichier associé
+---
+
+## Texte libre
+
+## Résumé
+
+## Conclusion
+```
+
+---
+
 ## settings.local.json
 
 - Claude Code allowed shell commands for the current user

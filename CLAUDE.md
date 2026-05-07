@@ -56,19 +56,6 @@ Avant de générer du code, lire :
 - `~/RULES_GENERIC.md` — règles communes à tout le code
 - `~/RULES_LANGAGES.md` — conventions par langage
 
-Chaque projet a :
-- `RULES_GENERIC.md` — symlink vers `~/RULES_GENERIC.md`
-- `RULES_LANGAGES.md` — subset de `~/RULES_LANGAGES.md` pour les langages utilisés
-
-Lire les fichiers projet en priorité. `RULES_LANGAGES.md` surcharge `RULES_GENERIC.md`
-pour le langage concerné.
-
-Propagation lors d'une correction :
-- Règle générique : modifier `RULES_GENERIC.md` depuis le projet (symlink) → fini
-- Règle langage : corriger `RULES_LANGAGES.md` projet → si pattern global, proposer
-  la correction dans `~/RULES_LANGAGES.md` → propager via `PROJECTS.md` aux projets
-  impactés en vérifiant les conflits avec leurs overrides
-
 ## Mémoire
 
 Écriture — chaque entrée suit le format :

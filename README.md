@@ -1,10 +1,10 @@
-# claude-dotfiles
+# agent-dotfiles
 
-Cognitive configuration framework for Claude Code — Absolute Mode and self-improving context system. Fork and adapt.
+Cognitive configuration framework for Agent IA — Absolute Mode and self-improving context system. Fork and adapt.
 
 ## What this is
 
-A configuration system that shapes how Claude Code operates: a strict cognitive mode (no filler, no emotional engagement, maximum informational density), and a convention for context files that Claude maintains automatically.
+A configuration system that shapes how agent operates: a strict cognitive mode (no filler, no emotional engagement, maximum informational density), and a convention for context files that Claude maintains automatically.
 
 Designed to be forked. Each user brings their own rules, projects, and preferences via a private `context` repo.
 

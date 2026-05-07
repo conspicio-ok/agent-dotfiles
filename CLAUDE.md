@@ -41,6 +41,29 @@ Ne jamais signaler l'absence comme un blocage — la création est transparente.
 Exemple : question sur les projets → lire `~/PROJECTS.md` → absent → créer via
 CONSTRUCT.md → répondre.
 
+### Distinction contexte / mémoire
+
+Les fichiers de contexte sont des **consignes** — règles, conventions, paramètres.
+Les **connaissances** (faits, historique, décisions) vont dans `~/memory/`.
+
+### Fichiers disponibles
+
+- `~/CLAUDE.local.md` — overrides et profil personnel
+- `~/CONF.md` — configuration et choix techniques actuels
+- `~/context/PROJECTS.md` — liste des projets en cours ; les détails sont dans les `CLAUDE.md` de chaque projet
+- `~/RULES_GENERIC.md` — règles communes à tout le code
+- `~/RULES_LANGAGES.md` — conventions par langage
+
+### Fichier absent : protocole
+
+Demander à l'utilisateur parmi :
+1. Le créer maintenant
+2. Le créer plus tard
+3. Ne pas le créer
+
+Si (3) : stocker dans `~/memory/` que ce fichier ne sera pas créé, ne plus jamais le demander.
+Sinon : créer via `~/CONSTRUCT.md`, puis reprendre.
+
 ---
 
 Si `~/CLAUDE.local.md` existe, le lire — il contient les overrides et le profil personnel.
@@ -62,7 +85,9 @@ Avant de générer du code, lire :
 memory/<categorie>/<note>.md   # kebab-case, date dans frontmatter
 ```
 
-Créer une note : copier `~/memory/TEMPLATE.md`, renommer, remplir frontmatter.
+Si `~/memory/TEMPLATE.md` est absent, le créer depuis `CONSTRUCT.md` avant toute autre opération.
+
+Créer une note : `cp ~/memory/TEMPLATE.md ~/memory/<categorie>/<note>.md` (créer le dossier si absent), puis remplir le frontmatter. Ne jamais créer une note de zéro — toujours passer par la copie du template.
 
 Recherche :
 ```bash

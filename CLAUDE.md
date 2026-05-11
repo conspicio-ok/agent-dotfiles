@@ -49,7 +49,6 @@ Les **connaissances** (faits, historique, décisions) vont dans `~/memory/`.
 ### Fichiers disponibles
 
 - `~/CLAUDE.local.md` — overrides et profil personnel
-- `~/CONF.md` — configuration et choix techniques actuels
 - `~/context/PROJECTS.md` — liste des projets en cours ; les détails sont dans les `CLAUDE.md` de chaque projet
 - `~/RULES_GENERIC.md` — règles communes à tout le code
 - `~/RULES_LANGAGES.md` — conventions par langage
@@ -69,8 +68,7 @@ Sinon : créer via `~/CONSTRUCT.md`, puis reprendre.
 Si `~/CLAUDE.local.md` existe, le lire — il contient les overrides et le profil personnel.
 
 Avant de répondre à toute question sur la configuration ou les choix techniques actuels,
-lire `~/CONF.md`. Ne pas demander où se trouve la conf, ne pas lire les fichiers de conf
-bruts en premier.
+lire `~/memory/system/<hostname>.md` via grep.
 
 Avant de répondre à toute question sur les projets en cours, lire `~/PROJECTS.md`.
 Les détails sont dans les `CLAUDE.md` de chaque projet.

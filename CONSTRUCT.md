@@ -11,18 +11,22 @@ For each missing file: create it at the expected path, populate it according to 
 - Contains personal overrides and additions to CLAUDE.md behavior
 - Contains the user's profile: machine identity, hardware, shell, keyboard layout, preferences
 - Contains the auto-improvement permission: whether Claude may modify CLAUDE.md itself
+- Contains a **Langue** section: conversation language and naming language for files/directories/identifiers
+- Contains an **Erreurs à ne pas reproduire** section: behavioral corrections to never repeat
 - Each section is a heading. No fixed section names — reflect what the user has communicated
 - Captures facts about the user as they emerge in conversation, not upfront
 
 ---
 
-## CONF.md
+## memory/system/\<hostname\>.md
 
-- Describes the current system state: active WM, terminal, display manager, shell, hardware
-- Read system state to populate it — do not ask the user to fill it manually
+- One file per machine, named by hostname (e.g. `orca.md`, `orca-laptop.md`)
+- Lives in `~/memory/system/` — part of the `memory` git repo
+- Uses the grep-able format: `### categorie sujet : valeur | lN` followed by N context lines
+- Read via `grep -A<N> "terme" ~/memory/system/<hostname>.md`
+- Populated by reading live system state — do not ask the user to fill it manually
 - Updated by Claude when system changes are made during a session
-- One section per concern (WM, hardware, services, etc.)
-- No commands, no install instructions — state only
+- Covers: OS, WM, display manager, session, shell, terminal, GPU, editor, tools
 
 ---
 

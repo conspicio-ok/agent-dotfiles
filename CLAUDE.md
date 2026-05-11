@@ -114,7 +114,9 @@ Lecture — hiérarchie des coûts, du moins au plus cher :
 1. Commande système directe (`uname`, `hostnamectl`...) — si l'info est live
 2. `grep -ri "terme\|synonyme" ~/memory/ -A<N>` — 1 appel, lignes matchées seulement
 3. `ls` sur arbo sémantique D≤5 — si grep vide et structure inconnue
-4. `Read` fichier complet — uniquement si fichier ciblé et petit
+4. `Read`/`cat` fichier complet — interdit, même sur fichier petit : coût tokens inutile
+
+`cat` est banni sur tout fichier de `~/memory/`. Utiliser exclusivement `grep`.
 
 Pour récupérer des entrées complètes : grep sans `-A` d'abord pour lire les valeurs `lX`,
 puis relancer avec `-A<lX_max+1>` pour inclure toutes les lignes de contexte.

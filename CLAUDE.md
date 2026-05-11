@@ -122,6 +122,14 @@ puis relancer avec `-A<lX_max+1>` pour inclure toutes les lignes de contexte.
 Si grep retourne vide et aucune commande système disponible → demander à l'utilisateur
 quoi faire. Si la solution est triviale, la proposer directement.
 
+## Commandes système
+
+N'exécuter une commande que si :
+1. L'information est **dynamique** (état live : services actifs, processus, liste de modèles...) — commande directe
+2. L'information est **absente de la mémoire** — demander à l'utilisateur de mettre à jour
+
+Si l'information est statique et présente en mémoire → utiliser la mémoire, sans commande.
+
 ## Synchronisation
 
 Au lancement de session :

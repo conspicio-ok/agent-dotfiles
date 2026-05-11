@@ -74,6 +74,46 @@ ln -sf ~/context/settings.local.json ~/.claude/settings.local.json
 
 Without the context repo, create the files manually — see `CONSTRUCT.md`.
 
+## Disabling Claude Code auto-memory
+
+Claude Code has a built-in file-based memory system at `~/.claude/projects/<project>/memory/`. It duplicates information already managed by the context files (`CLAUDE.local.md`, `PROJECTS.md`, etc.) and is not portable across machines.
+
+### Block auto-memory writes via hook
+
+Add a `PreToolUse` hook to `~/.claude/settings.json` that intercepts any `Write` or `Edit` call targeting the auto-memory directory and exits with code 2 (blocking the tool use):
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "file=$(echo \"$CLAUDE_TOOL_INPUT\" | python3 -c \"import sys,json; d=json.load(sys.stdin); print(d.get('file_path',''))\"); if echo \"$file\" | grep -q '\\.claude/projects/.*memory/'; then echo 'Blocked: auto-memory write disabled' >&2; exit 2; fi"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### Migrate existing auto-memory entries
+
+Before applying the hook, check `~/.claude/projects/<project>/memory/MEMORY.md` and migrate each entry to the appropriate canonical file:
+
+| Entry type | Destination |
+|---|---|
+| User profile, hardware | `~/context/CLAUDE.local.md` — *Profil utilisateur* |
+| Behavioral feedback, errors | `~/context/CLAUDE.local.md` — *Erreurs à ne pas reproduire* |
+| Coding conventions | `~/context/RULES_LANGAGES.md` |
+| Active projects | `~/context/PROJECTS.md` |
+| Knowledge, decisions, notes | `~/memory/<category>/<note>.md` (see `CONSTRUCT.md`) |
+
+Entries already present in the destination files can be discarded. Once migrated, the `~/.claude/.../memory/` directory can be deleted or left empty.
+
 ## Hermes Agent compatibility
 
 `CLAUDE.md` doubles as a `SOUL.md` for [Hermes Agent](https://github.com/NousResearch/hermes-agent) — the file is injected identically as the system prompt identity in both tools.

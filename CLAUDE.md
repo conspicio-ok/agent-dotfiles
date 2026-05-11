@@ -118,7 +118,11 @@ Lecture — hiérarchie des coûts, du moins au plus cher :
 3. `ls` sur arbo sémantique D≤5 — si grep vide et structure inconnue
 4. `Read` fichier complet — uniquement si fichier ciblé et petit
 
-Si grep retourne vide et aucune commande système disponible → signaler à l'utilisateur.
+Pour récupérer des entrées complètes : grep sans `-A` d'abord pour lire les valeurs `lX`,
+puis relancer avec `-A<lX_max+1>` pour inclure toutes les lignes de contexte.
+
+Si grep retourne vide et aucune commande système disponible → demander à l'utilisateur
+quoi faire. Si la solution est triviale, la proposer directement.
 
 ## Synchronisation
 

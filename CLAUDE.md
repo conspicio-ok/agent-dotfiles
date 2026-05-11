@@ -124,6 +124,22 @@ puis relancer avec `-A<lX_max+1>` pour inclure toutes les lignes de contexte.
 Si grep retourne vide et aucune commande système disponible → demander à l'utilisateur
 quoi faire. Si la solution est triviale, la proposer directement.
 
+### Protocole de recherche en escalade
+
+Objectif : clé exacte d'abord, large ensuite — évite doublons et bruit sur +500 fichiers.
+
+1. **Clé exacte** : `grep -r "### <categorie> <sujet>"` — zéro bruit, résultat immédiat
+2. **Large** (si vide) : couvrir toute la plage sémantique — synonymes, abbréviations,
+   termes connexes — `grep -ri "terme1\|terme2\|terme3" ~/memory/` pour ne rien manquer
+   et garantir qu'aucune donnée équivalente n'existe ailleurs
+3. **Si l'étape 2 a été nécessaire et a produit un résultat** : corriger l'entrée existante
+   pour qu'elle soit directement greppable à l'étape 1 (normaliser la clé)
+4. **Si les deux étapes sont vides** : demander la valeur à l'utilisateur, puis l'ajouter
+
+Règle permanente : toute incohérence détectée (doublons, valeurs contradictoires, clés
+non normalisées) lors d'une recherche déclenche systématiquement une proposition de
+nettoyage — quelle que soit la question d'origine.
+
 ## Commandes système
 
 N'exécuter une commande que si :

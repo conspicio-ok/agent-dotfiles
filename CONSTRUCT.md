@@ -99,6 +99,15 @@ liens:
 
 ---
 
+## memory/backlog.md
+
+- Fichier unique de tâches à la racine de `~/memory/`
+- Format grep-able : `### todo <scope> : <sujet> | l<N>`
+- Les entrées terminées sont supprimées — pas d'historique dans ce fichier
+- Créer depuis `TEMPLATE.md`, section `## Texte libre` uniquement
+
+---
+
 ## settings.local.json
 
 - Claude Code allowed shell commands for the current user

@@ -156,9 +156,28 @@ Au lancement de session :
   "Mises à jour disponibles sur [repo] — pull pour appliquer."
 - Ne jamais puller automatiquement.
 
-Après chaque modification d'un fichier dans `~/dotfiles` ou `~/context` :
-- `git -C <repo> add -A && git -C <repo> commit -m "auto: $(date -Iseconds)" && git -C <repo> push --quiet`
-- Silencieux, sans confirmation ni rapport à l'utilisateur.
+## Commits — accumulation sémantique
+
+État persistant : `~/.claude_pending_commit.json`
+```json
+{ "theme": "", "repos": [], "message": "" }
+```
+
+À chaque modification de fichier dans `~/dotfiles/`, `~/context/` ou `~/memory/` :
+
+1. Lire l'état pending (`~/.claude_pending_commit.json` — absent → thème vide)
+2. Évaluer si le thème courant est sémantiquement continu avec le pending
+3. **Continu** → `git -C <repo> add <fichier>` uniquement, mettre à jour `message` si plus précis
+4. **Rupture sémantique** → flush (commit + push le pending), puis initialiser un nouveau pending avec le thème courant
+5. **Signal explicite utilisateur** ("on refonte X", "nouveau sujet", etc.) → rupture immédiate
+
+Flush : pour chaque repo dans `repos[]` :
+`git -C <repo> commit -m "<message>" && git -C <repo> push --quiet`
+Puis supprimer `~/.claude_pending_commit.json`.
+
+Flush automatique : si pending non vide et aucune modification prévue dans le tour courant.
+
+Informer après flush en une ligne : thème commité + repos concernés.
 
 ## Auto-amélioration
 

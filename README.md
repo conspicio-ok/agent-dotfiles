@@ -12,7 +12,20 @@ Designed to be forked. Each user brings their own rules, projects, and preferenc
 
 This repo contains no personal configuration, coding rules, project lists, machine-specific settings, or session memory. Those live in a separate private `context` repo — entirely optional.
 
+## Why it exist
+
+Today, using AI is practically a must if you want to keep up with the pace in a world where everything is moving faster and faster.
+But there’s a difference in how it’s used: `fill empty columns with XXX` isn’t the same as `if the columns are empty during the query, assign the values XXX`. The functionality remains the same, but the user’s understanding is entirely different.
+That’s why I created these dotfiles. They are optimized for token economy and learning; the goal of this project is to create a second brain serving as a database with an intelligent interface that updates automatically via an LLM.
+I’m currently using them with Claude because I find it handles a large number of Markdown files in context best, but a version for Hermes Agent is in the works. Hermes can host local models or hosted models (I recommend Infomaniak AI Tools—gemma4:31b), which helps keep your footprint in check.
+This system is designed to consume less resources as it is used.
+
 ## Architecture
+
+The entire system works with three folders :
+- dotfiles/ - direction imposed by the project
+- context/  - direction imposed by the user
+- memory/   - knowledge database
 
 ```
 ~/dotfiles/             ← this repo (public)
@@ -21,11 +34,17 @@ This repo contains no personal configuration, coding rules, project lists, machi
 
 ~/context/              ← private repo (optional, for multi-machine sync)
 ├── CLAUDE.local.md     ← personal profile and overrides
-├── CONF.md             ← current system configuration
 ├── PROJECTS.md         ← active projects with git URLs
 ├── RULES_GENERIC.md    ← generic coding rules
 ├── RULES_LANGAGES.md   ← per-language conventions
 └── settings.local.json ← Claude Code allowed commands
+
+~/memory/               ← private repo (optional, for multi-machine sync)
+├── TEMPLATE.md         ← note template, always copy before creating a note
+├── README.md           ← memory usage instructions
+├── <category>/         ← one folder per domain (cours/, games/, system/, …)
+│   └── <note>.md       ← kebab-case filename, frontmatter with date + status
+└── …
 
 ~/                      ← symlinks pointing to the above
 ├── CLAUDE.md           → ~/dotfiles/CLAUDE.md
@@ -36,6 +55,7 @@ This repo contains no personal configuration, coding rules, project lists, machi
 └── RULES_LANGAGES.md   → ~/context/RULES_LANGAGES.md
 ```
 
+I suggest you to make a git for context and memory to have backup or sync with multi-machine
 The symlinks are what Claude Code reads. The repos are what git tracks.
 
 ## Private context repo
@@ -48,7 +68,7 @@ See `CONSTRUCT.md` for how to build each file from scratch.
 
 ```bash
 # 1. Clone this repo
-git clone git@github.com:conspicio-ok/claude-dotfiles.git ~/dotfiles
+git clone git@github.com:conspicio-ok/agent-dotfiles.git ~/dotfiles
 
 # 2. Symlink to home
 ln -sf ~/dotfiles/CLAUDE.md ~/CLAUDE.md

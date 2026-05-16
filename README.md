@@ -55,14 +55,8 @@ The entire system works with three folders :
 └── RULES_LANGAGES.md   → ~/context/RULES_LANGAGES.md
 ```
 
-I suggest you to make a git for context and memory to have backup or sync with multi-machine
+I suggest you to make a git for context and memory to have backup and/or sync with multiple machines but is **not required**, all folder can be created and used locally.
 The symlinks are what Claude Code reads. The repos are what git tracks.
-
-## Private context repo
-
-The `context` repo is **not required**. It exists solely to synchronize personal state between multiple machines. On a single machine, everything under `~/context/` can be created locally without versioning.
-
-See `CONSTRUCT.md` for how to build each file from scratch.
 
 ## Setup
 
@@ -98,31 +92,17 @@ Without the context repo, create the files manually — see `CONSTRUCT.md`.
 
 Claude Code has a built-in file-based memory system at `~/.claude/projects/<project>/memory/`. It duplicates information already managed by the context files (`CLAUDE.local.md`, `PROJECTS.md`, etc.) and is not portable across machines.
 
-### Block auto-memory writes via hook
+### Disable
 
-Add a `PreToolUse` hook to `~/.claude/settings.json` that intercepts any `Write` or `Edit` call targeting the auto-memory directory and exits with code 2 (blocking the tool use):
+Delete (or never create) `MEMORY.md` inside the auto-memory directory. Claude Code only loads memories from that directory when `MEMORY.md` is present — without it, the system is inert and writes are ignored.
 
-```json
-{
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "file=$(echo \"$CLAUDE_TOOL_INPUT\" | python3 -c \"import sys,json; d=json.load(sys.stdin); print(d.get('file_path',''))\"); if echo \"$file\" | grep -q '\\.claude/projects/.*memory/'; then echo 'Blocked: auto-memory write disabled' >&2; exit 2; fi"
-          }
-        ]
-      }
-    ]
-  }
-}
+```bash
+rm ~/.claude/projects/-home-conspicio/memory/MEMORY.md
 ```
 
 ### Migrate existing auto-memory entries
 
-Before applying the hook, check `~/.claude/projects/<project>/memory/MEMORY.md` and migrate each entry to the appropriate canonical file:
+Before disabling, check `~/.claude/projects/<project>/memory/MEMORY.md` and migrate each entry to the appropriate canonical file:
 
 | Entry type | Destination |
 |---|---|
@@ -132,7 +112,7 @@ Before applying the hook, check `~/.claude/projects/<project>/memory/MEMORY.md` 
 | Active projects | `~/context/PROJECTS.md` |
 | Knowledge, decisions, notes | `~/memory/<category>/<note>.md` (see `CONSTRUCT.md`) |
 
-Entries already present in the destination files can be discarded. Once migrated, the `~/.claude/.../memory/` directory can be deleted or left empty.
+Entries already present in the destination files can be discarded.
 
 ## Hermes Agent compatibility
 
@@ -146,3 +126,6 @@ ln -sf ~/dotfiles/CLAUDE.md ~/.hermes/profiles/local/SOUL.md  # if using a local
 ```
 
 The symlinks ensure a single source of truth: editing `CLAUDE.md` updates the behavior of both Claude Code and Hermes simultaneously.
+
+Hermes is not enable for now, you can use and improve it but i can't ensure good functioning.
+

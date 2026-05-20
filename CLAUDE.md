@@ -68,7 +68,7 @@ Sinon : créer via `~/CONSTRUCT.md`, puis reprendre.
 Si `~/CLAUDE.local.md` existe, le lire — il contient les overrides et le profil personnel.
 
 Avant de répondre à toute question sur la configuration ou les choix techniques actuels,
-lire `~/memory/system/<hostname>.md` via grep.
+lire `~/memory/<hostname>.md` via grep.
 
 Avant de répondre à toute question sur les projets en cours, lire `~/PROJECTS.md`.
 Les détails sont dans les `CLAUDE.md` de chaque projet.
@@ -114,7 +114,6 @@ Lecture — hiérarchie des coûts, du moins au plus cher :
 1. Commande système directe (`uname`, `hostnamectl`...) — si l'info est live
 2. `grep -ri "terme\|synonyme" ~/memory/ -A<N>` — 1 appel, lignes matchées seulement
 3. `ls` sur arbo sémantique D≤5 — si grep vide et structure inconnue
-4. `Read`/`cat` fichier complet — interdit, même sur fichier petit : coût tokens inutile
 
 `cat` est banni sur tout fichier de `~/memory/`. Utiliser exclusivement `grep`.
 
@@ -128,8 +127,8 @@ quoi faire. Si la solution est triviale, la proposer directement.
 
 Objectif : clé exacte d'abord, large ensuite — évite doublons et bruit sur +500 fichiers.
 
-1. **Clé exacte** : `grep -r "### <categorie> <sujet>"` — zéro bruit, résultat immédiat
-2. **Large** (si vide) : couvrir toute la plage sémantique — synonymes, abbréviations,
+1. **Clé exacte** : `grep -r "<categorie> <sujet>"` — zéro bruit, résultat immédiat
+2. **Large** (si 1. vide) : couvrir toute la plage sémantique — synonymes, abbréviations,
    termes connexes — `grep -ri "terme1\|terme2\|terme3" ~/memory/` pour ne rien manquer
    et garantir qu'aucune donnée équivalente n'existe ailleurs
 3. **Si l'étape 2 a été nécessaire et a produit un résultat** : corriger l'entrée existante
@@ -151,7 +150,7 @@ Si l'information est statique et présente en mémoire → utiliser la mémoire,
 ## Synchronisation
 
 Au lancement de session :
-- Exécuter `git fetch` sur `~/dotfiles` et `~/context`.
+- Exécuter `git fetch` sur `~/dotfiles`, `~/context` et `~/memory`.
 - Si des commits sont disponibles en amont, signaler à l'utilisateur :
   "Mises à jour disponibles sur [repo] — pull pour appliquer."
 - Ne jamais puller automatiquement.
@@ -183,7 +182,7 @@ Informer après flush en une ligne : thème commité + repos concernés.
 
 - Ne pas modifier ce fichier (CLAUDE.md).
 - Mettre à jour les fichiers annexes dès qu'une information pertinente émerge, après
-  validation utilisateur : `CLAUDE.local.md`, `CONF.md`, `PROJECTS.md`, `RULES_*.md`.
+  validation utilisateur : `CLAUDE.local.md`, `PROJECTS.md`, `RULES_*.md`.
 - Enregistrer les informations sur l'utilisateur, son environnement, ses préférences
   dans les fichiers appropriés.
 - Toute information de profil révélée implicitement en conversation doit être capturée

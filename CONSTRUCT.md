@@ -90,12 +90,18 @@ liens:
   titres: []        # références conceptuelles sans fichier associé
 ---
 
+# <Titre — identique au frontmatter>
+
 ## Texte libre
 
 ## Résumé
 
 ## Conclusion
 ```
+
+Hiérarchie des titres : `#` titre du fichier (unique) → `##` structure (Texte libre,
+Résumé, Conclusion) → `###` sections thématiques ou entrées directes → `####`+ entrées
+sous une section thématique. Niveaux strictement descendants, sans saut ni inversion.
 
 ---
 

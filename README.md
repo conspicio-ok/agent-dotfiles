@@ -17,7 +17,7 @@ This repo contains no personal configuration, coding rules, project lists, machi
 Today, using AI is practically a must if you want to keep up with the pace in a world where everything is moving faster and faster.
 But there’s a difference in how it’s used: `fill empty columns with XXX` isn’t the same as `if the columns are empty during the query, assign the values XXX`. The functionality remains the same, but the user’s understanding is entirely different.
 That’s why I created these dotfiles. They are optimized for token economy and learning; the goal of this project is to create a second brain serving as a database with an intelligent interface that updates automatically via an LLM.
-I’m currently using them with Claude because I find it handles a large number of Markdown files in context best, but a version for Hermes Agent is in the works. Hermes can host local models or hosted models (I recommend Infomaniak AI Tools—gemma4:31b), which helps keep your footprint in check.
+I’m currently using them with Claude because I find it handles a large number of Markdown files in context best,.
 This system is designed to consume less resources as it is used.
 
 ## Architecture
@@ -129,19 +129,3 @@ Before disabling, check `~/.claude/projects/<project>/memory/MEMORY.md` and migr
 | Knowledge, decisions, notes | `~/memory/<category>/<note>.md` (see `CONSTRUCT.md`) |
 
 Entries already present in the destination files can be discarded.
-
-## Hermes Agent compatibility
-
-`CLAUDE.md` doubles as a `SOUL.md` for [Hermes Agent](https://github.com/NousResearch/hermes-agent) — the file is injected identically as the system prompt identity in both tools.
-
-Symlink after setting up Hermes:
-
-```bash
-ln -sf ~/dotfiles/CLAUDE.md ~/.hermes/SOUL.md
-ln -sf ~/dotfiles/CLAUDE.md ~/.hermes/profiles/local/SOUL.md  # if using a local profile
-```
-
-The symlinks ensure a single source of truth: editing `CLAUDE.md` updates the behavior of both Claude Code and Hermes simultaneously.
-
-Hermes is not enable for now, you can use and improve it but i can't ensure good functioning.
-

@@ -40,19 +40,10 @@ For each missing file: create it at the expected path, populate it according to 
 
 ---
 
-## RULES_GENERIC.md
-
-- Contains coding rules that apply across all languages
-- Rules are prescriptive and unambiguous — no suggestions, no "consider"
-- Organized by concern (naming, structure, error handling, etc.)
-- Updated by Claude when a correction or new rule emerges from a session
-
----
-
 ## Skills `lang-<langage>`
 
 - Created with the `lang-skill-builder` skill, updated with `lang-skill-updater` (`~/dotfiles/skills/`)
-- Common rules come from RULES_GENERIC.md
+- Common rules: `~/context/skills/common.md` — prescriptive, unambiguous, organized by concern; merged into each lang-* skill
 
 ---
 

@@ -33,12 +33,12 @@ The entire system works with three folders :
 ├── CONSTRUCT.md        ← how to build each missing file from scratch
 └── skills/             ← generic Claude Code skills
     ├── lang-skill-builder/  ← creates a lang-<language> skill
-    └── lang-skill-updater/  ← updates lang-* skills, propagates RULES_GENERIC.md changes
+    └── lang-skill-updater/  ← updates lang-* skills, propagates common rule changes
 
 ~/context/              ← private repo (optional, for multi-machine sync)
 ├── CLAUDE.local.md     ← personal profile and overrides
 ├── PROJECTS.md         ← active projects with git URLs
-├── RULES_GENERIC.md    ← generic coding rules, merged into each lang-* skill
+├── skills/common.md    ← generic coding rules, merged into each lang-* skill
 ├── skills/lang-<language>/SKILL.md ← per-language conventions, self-contained
 └── settings.local.json ← Claude Code allowed commands
 
@@ -53,8 +53,7 @@ The entire system works with three folders :
 ├── CLAUDE.md           → ~/dotfiles/CLAUDE.md
 ├── CONSTRUCT.md        → ~/dotfiles/CONSTRUCT.md
 ├── CONF.md             → ~/context/CONF.md
-├── PROJECTS.md         → ~/context/PROJECTS.md
-└── RULES_GENERIC.md    → ~/context/RULES_GENERIC.md
+└── PROJECTS.md         → ~/context/PROJECTS.md
 
 ~/.claude/skills/       ← one symlink per skill
 ├── lang-skill-builder  → ~/dotfiles/skills/lang-skill-builder
@@ -65,7 +64,7 @@ The entire system works with three folders :
 ### Language skills
 
 Per-language conventions are Claude Code skills, one per language. Only each skill's `description` stays in context; its body loads when a file of that language is touched. A single rules file would load every language at once.
-Each `lang-<language>` skill is self-contained: the generic rules from `RULES_GENERIC.md` that apply to the language are merged in, language rules win on conflict. `lang-skill-builder` creates a skill for a new language, `lang-skill-updater` edits one or propagates a `RULES_GENERIC.md` change to all of them.
+Each `lang-<language>` skill is self-contained: the generic rules from `~/context/skills/common.md` that apply to the language are merged in, language rules win on conflict. `lang-skill-builder` creates a skill for a new language, `lang-skill-updater` edits one or propagates a common rule change to all of them.
 
 I suggest you to make a git for context and memory to have backup and/or sync with multiple machines but is **not required**, all folder can be created and used locally.
 The symlinks are what Claude Code reads. The repos are what git tracks.
@@ -95,7 +94,6 @@ git clone git@github.com:<you>/context.git ~/context
 ln -sf ~/context/CLAUDE.local.md ~/CLAUDE.local.md
 ln -sf ~/context/CONF.md ~/CONF.md
 ln -sf ~/context/PROJECTS.md ~/PROJECTS.md
-ln -sf ~/context/RULES_GENERIC.md ~/RULES_GENERIC.md
 for d in ~/context/skills/*/; do ln -sfn "$d" ~/.claude/skills/; done
 
 # 6. Symlink Claude Code settings

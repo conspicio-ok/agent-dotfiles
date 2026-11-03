@@ -5,7 +5,7 @@ description: Créer un skill de conventions de langage lang-<langage> pour un la
 
 # Création d'un skill lang-<langage>
 
-Un skill `lang-<langage>` est autonome : il fusionne les règles communes de `~/RULES_GENERIC.md`
+Un skill `lang-<langage>` est autonome : il fusionne les règles communes de `~/context/skills/common.md`
 et les conventions propres au langage, pour qu'un seul skill chargé suffise.
 
 ## Procédure
@@ -17,7 +17,7 @@ et les conventions propres au langage, pour qu'un seul skill chargé suffise.
 4. Corps, dans cet ordre :
    - `# <Langage>`
    - `Le style du code existant d'un projet prime sur ces règles.`
-   - `## Commun` : les règles de `~/RULES_GENERIC.md` applicables au langage
+   - `## Commun` : les règles de `~/context/skills/common.md` applicables au langage
    - `## <Langage>` : les conventions propres au langage
 5. Fusion : en cas de conflit, la règle du langage remplace la règle commune. Une règle commune
    inapplicable est omise (ex. alignement par tabs dans un langage où les tabs sont interdits).

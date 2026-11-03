@@ -52,7 +52,6 @@ Les **connaissances** (faits, historique, décisions) vont dans `~/memory/`.
 
 - `~/CLAUDE.local.md` — overrides et profil personnel
 - `~/context/PROJECTS.md` — liste des projets en cours ; les détails sont dans les `CLAUDE.md` de chaque projet
-- `~/RULES_GENERIC.md` — règles communes à tout le code, fusionnées dans les skills `lang-*`
 
 ### Fichier absent : protocole
 
@@ -82,7 +81,7 @@ Conventions de code : un skill `lang-<langage>` par langage, autonome (règles c
 incluses), source dans `~/context/skills/lang-<langage>/SKILL.md`, lié dans `~/.claude/skills/`.
 
 - Avant d'écrire, modifier ou relire du code : charger le skill du langage concerné.
-- Règles communes : `~/RULES_GENERIC.md`, source unique.
+- Règles communes : `~/context/skills/common.md`, source unique, non chargée en session.
 - Langage sans skill : skill `lang-skill-builder`. Convention ou règle commune modifiée :
   skill `lang-skill-updater`. Les deux vivent dans `~/dotfiles/skills/`.
 - Un skill par langage, jamais un fichier unique : seule la `description` reste en

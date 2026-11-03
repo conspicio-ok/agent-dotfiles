@@ -49,12 +49,10 @@ For each missing file: create it at the expected path, populate it according to 
 
 ---
 
-## RULES_LANGAGES.md
+## Skills `lang-<langage>`
 
-- Contains per-language conventions
-- One section per language
-- Overrides RULES_GENERIC.md for the language in question
-- Same prescriptive format as RULES_GENERIC.md
+- Created with the `lang-skill-builder` skill, updated with `lang-skill-updater` (`~/dotfiles/skills/`)
+- Common rules come from RULES_GENERIC.md
 
 ---
 

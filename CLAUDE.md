@@ -52,8 +52,7 @@ Les **connaissances** (faits, historique, décisions) vont dans `~/memory/`.
 
 - `~/CLAUDE.local.md` — overrides et profil personnel
 - `~/context/PROJECTS.md` — liste des projets en cours ; les détails sont dans les `CLAUDE.md` de chaque projet
-- `~/RULES_GENERIC.md` — règles communes à tout le code
-- `~/RULES_LANGAGES.md` — conventions par langage
+- `~/RULES_GENERIC.md` — règles communes à tout le code, fusionnées dans les skills `lang-*`
 
 ### Fichier absent : protocole
 
@@ -75,9 +74,21 @@ lire `~/memory/<hostname>.md` via grep.
 Avant de répondre à toute question sur les projets en cours, lire `~/PROJECTS.md`.
 Les détails sont dans les `CLAUDE.md` de chaque projet.
 
-Avant de générer du code, lire :
-- `~/RULES_GENERIC.md` — règles communes à tout le code
-- `~/RULES_LANGAGES.md` — conventions par langage
+Avant de générer du code, charger le skill `lang-<langage>` du langage concerné (voir Skills).
+
+## Skills
+
+Conventions de code : un skill `lang-<langage>` par langage, autonome (règles communes
+incluses), source dans `~/context/skills/lang-<langage>/SKILL.md`, lié dans `~/.claude/skills/`.
+
+- Avant d'écrire, modifier ou relire du code : charger le skill du langage concerné.
+- Règles communes : `~/RULES_GENERIC.md`, source unique.
+- Langage sans skill : skill `lang-skill-builder`. Convention ou règle commune modifiée :
+  skill `lang-skill-updater`. Les deux vivent dans `~/dotfiles/skills/`.
+- Un skill par langage, jamais un fichier unique : seule la `description` reste en
+  contexte, le corps n'est chargé qu'à l'usage.
+- Les projets génèrent leurs propres skills dans `.claude/skills/`, pour les langages
+  utilisés uniquement.
 
 ## Memory (`~/memory/`)
 
@@ -148,14 +159,6 @@ N'exécuter une commande que si :
 2. L'information est **absente de la mémoire** — demander à l'utilisateur de mettre à jour
 
 Si l'information est statique et présente en mémoire → utiliser la mémoire, sans commande.
-
-## Synchronisation
-
-Au lancement de session :
-- Exécuter `git fetch` sur `~/dotfiles`, `~/context` et `~/memory`.
-- Si des commits sont disponibles en amont, signaler à l'utilisateur :
-  "Mises à jour disponibles sur [repo] — pull pour appliquer."
-- Ne jamais puller automatiquement.
 
 ## Commits — accumulation sémantique
 

@@ -89,67 +89,16 @@ incluses), source dans `~/context/skills/lang-<langage>/SKILL.md`, lié dans `~/
 - Les projets génèrent leurs propres skills dans `.claude/skills/`, pour les langages
   utilisés uniquement.
 
-## Memory (`~/memory/`)
+## Mémoire (`~/memory/`)
 
-```
-memory/<categorie>/<note>.md   # kebab-case, date dans frontmatter
-```
+Lecture :
+- Clé exacte connue (`<categorie> <sujet>`) : un `grep -r` direct, toi-même.
+- Recherche large, deux greps ou plus attendus, ou sortie volumineuse : agent `explorer` (consigne : le sujet, rien d'autre).
+- Jamais `cat` sur un fichier de `~/memory/`.
+- Si la recherche revient vide et qu'aucune commande système ne répond : demander à l'utilisateur, ou proposer directement la solution si elle est triviale.
+- Doublon, valeur contradictoire ou clé non normalisée détecté : proposer un nettoyage, quelle que soit la question d'origine.
 
-Si `~/memory/TEMPLATE.md` est absent, le créer depuis `CONSTRUCT.md` avant toute autre opération.
-
-Créer une note : `cp ~/memory/TEMPLATE.md ~/memory/<categorie>/<note>.md` (créer le dossier si absent), puis remplir le frontmatter. Ne jamais créer une note de zéro — toujours passer par la copie du template.
-
-Recherche :
-```bash
-grep -r "terme" ~/memory/
-grep -rl "statut: brouillon" ~/memory/
-grep -r "domaines:.*physique" ~/memory/
-```
-
-Passer propre : compléter résumé + conclusion, `statut: propre`, mettre à jour `updated`.
-
-## Mémoire
-
-Écriture — chaque entrée suit le format :
-
-```
-### <categorie> <sujet> : <valeur> | l<N>
-<N lignes de contexte>
-```
-
-`lN` indique le nombre de lignes de contexte suivant le header. Utiliser `grep -A<N>` pour
-récupérer l'entrée complète. Ne pas stocker ce qui est récupérable par commande système.
-Stocker : raisons de choix, contraintes non évidentes, historique de décisions.
-
-Lecture — hiérarchie des coûts, du moins au plus cher :
-
-1. Commande système directe (`uname`, `hostnamectl`...) — si l'info est live
-2. `grep -ri "terme\|synonyme" ~/memory/ -A<N>` — 1 appel, lignes matchées seulement
-3. `ls` sur arbo sémantique D≤5 — si grep vide et structure inconnue
-
-`cat` est banni sur tout fichier de `~/memory/`. Utiliser exclusivement `grep`.
-
-Pour récupérer des entrées complètes : grep sans `-A` d'abord pour lire les valeurs `lX`,
-puis relancer avec `-A<lX_max+1>` pour inclure toutes les lignes de contexte.
-
-Si grep retourne vide et aucune commande système disponible → demander à l'utilisateur
-quoi faire. Si la solution est triviale, la proposer directement.
-
-### Protocole de recherche en escalade
-
-Objectif : clé exacte d'abord, large ensuite — évite doublons et bruit sur +500 fichiers.
-
-1. **Clé exacte** : `grep -r "<categorie> <sujet>"` — zéro bruit, résultat immédiat
-2. **Large** (si 1. vide) : couvrir toute la plage sémantique — synonymes, abbréviations,
-   termes connexes — `grep -ri "terme1\|terme2\|terme3" ~/memory/` pour ne rien manquer
-   et garantir qu'aucune donnée équivalente n'existe ailleurs
-3. **Si l'étape 2 a été nécessaire et a produit un résultat** : corriger l'entrée existante
-   pour qu'elle soit directement greppable à l'étape 1 (normaliser la clé)
-4. **Si les deux étapes sont vides** : demander la valeur à l'utilisateur, puis l'ajouter
-
-Règle permanente : toute incohérence détectée (doublons, valeurs contradictoires, clés
-non normalisées) lors d'une recherche déclenche systématiquement une proposition de
-nettoyage — quelle que soit la question d'origine.
+Écriture : charger le skill `memory-write`.
 
 ## Commandes système
 
@@ -186,7 +135,7 @@ Informer après flush en une ligne : thème commité + repos concernés.
 
 - Ne pas modifier ce fichier (CLAUDE.md).
 - Mettre à jour les fichiers annexes dès qu'une information pertinente émerge, après
-  validation utilisateur : `CLAUDE.local.md`, `PROJECTS.md`, `RULES_*.md`.
+  validation utilisateur : `CLAUDE.local.md`, `PROJECTS.md`.
 - Enregistrer les informations sur l'utilisateur, son environnement, ses préférences
   dans les fichiers appropriés.
 - Toute information de profil révélée implicitement en conversation doit être capturée

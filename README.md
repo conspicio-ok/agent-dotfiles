@@ -31,9 +31,13 @@ The entire system works with three folders :
 ~/dotfiles/             ← this repo (public)
 ├── CLAUDE.md           ← Absolute Mode + context file reading rules
 ├── CONSTRUCT.md        ← how to build each missing file from scratch
+├── claude/             ← Claude Code settings and subagents
+│   ├── settings.json   ← model, effort, advisor, plugins
+│   └── agents/         ← subagents (explorer: read-only, Haiku)
 └── skills/             ← generic Claude Code skills
     ├── lang-skill-builder/  ← creates a lang-<language> skill
-    └── lang-skill-updater/  ← updates lang-* skills, propagates common rule changes
+    ├── lang-skill-updater/  ← updates lang-* skills, propagates common rule changes
+    └── memory-write/        ← writing rules for ~/memory/
 
 ~/context/              ← private repo (optional, for multi-machine sync)
 ├── CLAUDE.local.md     ← personal profile and overrides
@@ -58,7 +62,12 @@ The entire system works with three folders :
 ~/.claude/skills/       ← one symlink per skill
 ├── lang-skill-builder  → ~/dotfiles/skills/lang-skill-builder
 ├── lang-skill-updater  → ~/dotfiles/skills/lang-skill-updater
+├── memory-write        → ~/dotfiles/skills/memory-write
 └── lang-<language>     → ~/context/skills/lang-<language>
+
+~/.claude/
+├── settings.json       → ~/dotfiles/claude/settings.json
+└── agents              → ~/dotfiles/claude/agents
 ```
 
 ### Language skills
@@ -83,6 +92,15 @@ ln -sf ~/dotfiles/CONSTRUCT.md ~/CONSTRUCT.md
 mkdir -p ~/.claude/skills
 for d in ~/dotfiles/skills/*/; do ln -sfn "$d" ~/.claude/skills/; done
 ```
+
+Claude Code settings and subagents:
+
+```bash
+ln -sfn ~/dotfiles/claude/settings.json ~/.claude/settings.json
+ln -sfn ~/dotfiles/claude/agents ~/.claude/agents
+```
+
+An existing regular `~/.claude/settings.json` or `~/.claude/agents` is replaced: back it up first. Plugins declared in `settings.json` are installed from their marketplaces after a confirmation at first launch. Login is per machine.
 
 If using a private context repo:
 

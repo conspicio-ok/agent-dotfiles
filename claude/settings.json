@@ -1,0 +1,29 @@
+{
+  "model": "sonnet",
+  "enabledPlugins": {
+    "i-have-adhd@i-have-adhd": true,
+    "ponytail@ponytail": true
+  },
+  "extraKnownMarketplaces": {
+    "i-have-adhd": {
+      "source": {
+        "source": "github",
+        "repo": "ayghri/i-have-adhd"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    }
+  },
+  "effortLevel": "medium",
+  "advisorModel": "opus",
+  "promptSuggestionEnabled": false,
+  "awaySummaryEnabled": false,
+  "tui": "fullscreen",
+  "theme": "light-ansi",
+  "switchModelsOnFlag": false,
+  "agentPushNotifEnabled": true
+}

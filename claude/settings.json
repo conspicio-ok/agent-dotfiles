@@ -1,8 +1,38 @@
 {
   "model": "sonnet",
+  "permissions": {
+    "ask": [
+      "mcp__logseq-admin"
+    ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -I ~/context/claude/hooks/token-usage.py"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -I ~/context/claude/hooks/repo-pull.py",
+            "async": true
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
     "i-have-adhd@i-have-adhd": true,
-    "ponytail@ponytail": true
+    "ponytail@ponytail": true,
+    "obsidian@obsidian-skills": true
   },
   "extraKnownMarketplaces": {
     "i-have-adhd": {
@@ -16,14 +46,29 @@
         "source": "github",
         "repo": "DietrichGebert/ponytail"
       }
+    },
+    "obsidian-skills": {
+      "source": {
+        "source": "github",
+        "repo": "kepano/obsidian-skills"
+      }
     }
   },
   "effortLevel": "medium",
+  "modelSettings": {
+    "claude-opus-5": {
+      "effortLevel": "medium"
+    },
+    "claude-opus-5-5": {
+      "autoCompactWindow": 400000
+    }
+  },
   "advisorModel": "opus",
   "promptSuggestionEnabled": false,
   "awaySummaryEnabled": false,
   "tui": "fullscreen",
   "theme": "light-ansi",
   "switchModelsOnFlag": false,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "autoUpdates": false
 }

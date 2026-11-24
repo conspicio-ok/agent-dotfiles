@@ -1,0 +1,6 @@
+{
+  "name": "agents-board",
+  "version": "0.1.0",
+  "description": "Bande au-dessus du prompt listant les sous-agents et leur état",
+  "types": "./types/index.d.ts"
+}

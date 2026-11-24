@@ -89,6 +89,20 @@ incluses), source dans `~/context/skills/lang-<langage>/SKILL.md`, lié dans `~/
 - Les projets génèrent leurs propres skills dans `.claude/skills/`, pour les langages
   utilisés uniquement.
 
+## Développement — chaîne de prod
+
+Toute modification de code passe par la chaîne d'agents, orchestrée par le chat :
+`cadrage` → `chercheur` → `implementeur` (un par tâche, en parallèle si fichiers disjoints)
+→ `tests` + audits (`audit-cadrage`, `audit-proprete`, `audit-securite`, puis
+`audit-asserts-*` et `audit-execution`) → `conclusion`.
+
+- Le chat pose le bloc racine puis les tâches de tests, d'audit et de conclusion dans la
+  pipeline (`mcp__agents-board__pipeline_*`) ; le chercheur déclare les tâches
+  d'implémentation et leurs fichiers.
+- Validation utilisateur après le cadrage, et après le rapport du chercheur quand il
+  indique `Validation requise : oui`.
+- Audit direct sans modification : agents d'audit seuls, ni tests ni conclusion.
+
 ## Mémoire (`~/memory/`)
 
 Lecture :

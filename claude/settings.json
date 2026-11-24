@@ -1,9 +1,12 @@
 {
-  "model": "sonnet",
   "permissions": {
     "ask": [
       "mcp__logseq-admin"
     ]
+  },
+  "model": "opus",
+  "env": {
+    "CLAUDE_CODE_PLUGIN_DIRS": "~/dotfiles/claude/mods/agents-board"
   },
   "hooks": {
     "Stop": [
@@ -66,8 +69,15 @@
   "advisorModel": "opus",
   "promptSuggestionEnabled": false,
   "awaySummaryEnabled": false,
+  "pluginConfigs": {
+    "ponytail@ponytail": {
+      "options": {
+        "ledger": false
+      }
+    }
+  },
   "tui": "fullscreen",
-  "theme": "light-ansi",
+  "theme": "dark-ansi",
   "switchModelsOnFlag": false,
   "agentPushNotifEnabled": true,
   "autoUpdates": false

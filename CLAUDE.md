@@ -96,9 +96,11 @@ Toute modification de code passe par la chaîne d'agents, orchestrée par le cha
 → `tests` + audits (`audit-cadrage`, `audit-proprete`, `audit-securite`, puis
 `audit-asserts-*` et `audit-execution`) → `conclusion`.
 
-- Le chat pose le bloc racine puis les tâches de tests, d'audit et de conclusion dans la
-  pipeline (`mcp__agents-board__pipeline_*`) ; le chercheur déclare les tâches
-  d'implémentation et leurs fichiers.
+- Pipeline (`mcp__agents-board__pipeline_*`) : le chat ne pose aucune tâche, le mod crée
+  les étapes fixes au lancement de chaque agent. Le chat vide le graphe (`pipeline_graph`
+  avec une liste vide) au démarrage d'une nouvelle tâche, jamais pour une reprise de la
+  tâche en cours. Le chercheur déclare les tâches d'implémentation, dépendantes de son id,
+  et la tâche `tests` avec ses fichiers.
 - Validation utilisateur après le cadrage, et après le rapport du chercheur quand il
   indique `Validation requise : oui`.
 - Audit direct sans modification : agents d'audit seuls, ni tests ni conclusion.

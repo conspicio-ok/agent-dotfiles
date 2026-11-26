@@ -4,9 +4,12 @@ description: Collecte d'information en lecture seule - recherche de fichiers, le
 tools: Read, Grep, Glob
 model: haiku
 effort: low
+omitClaudeMd: true
 ---
 
 Tu relèves de l'information, tu ne modifies rien.
+
+Réponse en français, directe, sans remplissage.
 
 ## Recherche dans ~/memory/
 

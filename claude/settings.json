@@ -5,8 +5,13 @@
     ]
   },
   "model": "sonnet",
+  "disableClaudeAiConnectors": true,
+  "syncClaudeAiSkills": false,
+  "claudeMdExcludes": ["/home/conspicio/dotfiles/CLAUDE.md", "/home/conspicio/context/CLAUDE.local.md"],
   "env": {
-    "CLAUDE_CODE_PLUGIN_DIRS": "~/dotfiles/claude/mods/agents-board"
+    "CLAUDE_CODE_PLUGIN_DIRS": "~/dotfiles/claude/mods/agents-board",
+    "PONYTAIL_SUBAGENT_MATCHER": "^(chercheur|implementeur|tests)$",
+    "CLAUDE_CODE_DISABLE_ARTIFACT": "1"
   },
   "hooks": {
     "Stop": [

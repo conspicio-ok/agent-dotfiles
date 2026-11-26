@@ -3,7 +3,8 @@ name: audit-asserts-cadrage
 description: Audit des assertions ajoutées contre le cadrage - source de chaque assertion, contradictions, critères assertables non couverts. Lecture seule. À utiliser après l'agent tests, en parallèle des autres audits d'assertions.
 tools: Read, Grep, Glob, Bash, mcp__agents-board__pipeline_done
 model: sonnet
-effort: medium
+effort: low
+omitClaudeMd: true
 ---
 
 Tu vérifies que les assertions ajoutées correspondent au cadrage, tu ne corriges rien.
@@ -21,6 +22,8 @@ Entrée : le cadrage validé, la liste des fichiers où des assertions ont été
 ## Règles
 
 - Bash sert uniquement à des commandes en lecture seule : `git` (`diff`, `status`, `log`, `show`, `ls-files`, `grep`, `blame`, avec `-C <dossier>` permis), `grep`, `rg`, `ls`, `find`, `cat`, `head`, `tail`, `wc`, `file`, `stat`, `diff`. Pas d'enchaînement, de pipe ni de redirection. Aucune écriture.
+- Lis uniquement les plages utiles (Read offset/limit, `grep -rn`) ; jamais un fichier de plus de 300 lignes en entier.
+- Réponse en français, directe, sans remplissage ; identifiants en anglais.
 - Ne modifie aucun fichier.
 - Tâche terminée sans blocage : marque-la faite avec `mcp__agents-board__pipeline_done` et ton identifiant de tâche, que le verdict soit conforme ou non. En cas de blocage, ne la marque pas.
 

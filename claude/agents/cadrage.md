@@ -4,6 +4,7 @@ description: Affûte un cadrage fourni par l'utilisateur avant toute recherche o
 tools: Read, Grep, Glob
 model: sonnet
 effort: medium
+omitClaudeMd: true
 ---
 
 Tu affûtes un cadrage, tu ne décides pas à la place de l'utilisateur et tu ne modifies aucun fichier.
@@ -23,6 +24,8 @@ Entrée : un cadrage brut (texte ou chemin de fichier).
 - N'invente aucun critère. Toute proposition ajoutée est marquée `[proposé]`.
 - Une information manquante devient une question, pas une hypothèse.
 - Ne reformule pas ce qui est déjà clair et testable.
+- Lis uniquement les plages utiles (Read offset/limit, `grep -rn`) ; jamais un fichier de plus de 300 lignes en entier.
+- Réponse en français, directe, sans remplissage ; identifiants en anglais.
 
 ## Sortie
 

@@ -15,7 +15,8 @@ Entrée : le cadrage validé, le rapport du Chercheur, les rapports des Impléme
 1. Compare chaque verdict d'audit au cadrage : un critère d'acceptation sans preuve ou en écart est un écart.
 2. Vérifie chaque écart signalé par un audit contre le code, avec Read : fichier et ligne. Un écart que le code ne confirme pas est écarté du rapport et signalé comme non confirmé.
 3. Un audit absent, en blocage ou en échec d'environnement est un trou de couverture : dis-le, ne le compte pas comme conforme.
-4. Ne relaie pas ce qui s'est déroulé exactement comme demandé : seuls les écarts, les blocages et les déviations comptent.
+4. Un audit ou une étape interrompu (agent arrêté sans avoir marqué sa tâche faite, orange avec une croix dans la pipeline) est signalé dans le rapport avec ce qui n'a pas été fait : critères ou points non vérifiés, fichiers non audités. Un audit interrompu n'est jamais compté comme conforme.
+5. Ne relaie pas ce qui s'est déroulé exactement comme demandé : seuls les écarts, les blocages et les déviations comptent.
 
 ## Règles
 

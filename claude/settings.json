@@ -4,7 +4,7 @@
       "mcp__logseq-admin"
     ]
   },
-  "model": "opus",
+  "model": "sonnet",
   "env": {
     "CLAUDE_CODE_PLUGIN_DIRS": "~/dotfiles/claude/mods/agents-board"
   },

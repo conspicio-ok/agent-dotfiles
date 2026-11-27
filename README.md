@@ -30,14 +30,15 @@ The entire system works with three folders :
 ```
 ~/dotfiles/             ← this repo (public)
 ├── CLAUDE.md           ← Absolute Mode + context file reading rules
-├── CONSTRUCT.md        ← how to build each missing file from scratch
 ├── claude/             ← Claude Code settings and subagents
 │   ├── settings.json   ← model, effort, advisor, plugins
 │   └── agents/         ← subagents (explorer: read-only, Haiku)
 └── skills/             ← generic Claude Code skills
     ├── lang-skill-builder/  ← creates a lang-<language> skill
     ├── lang-skill-updater/  ← updates lang-* skills, propagates common rule changes
-    └── memory-write/        ← writing rules for ~/memory/
+    ├── memory-write/        ← writing rules for ~/memory/
+    └── setup/               ← /setup: builds default files and symlinks, safe to re-run
+        └── templates/       ← default CLAUDE.local.md, PROJECTS.md, TEMPLATE.md, …
 
 ~/context/              ← private repo (optional, for multi-machine sync)
 ├── CLAUDE.local.md     ← personal profile and overrides
@@ -48,6 +49,8 @@ The entire system works with three folders :
 
 ~/memory/               ← private repo (optional, for multi-machine sync)
 ├── TEMPLATE.md         ← note template, always copy before creating a note
+├── backlog.md          ← single task list
+├── <hostname>.md       ← machine state, filled from live system
 ├── README.md           ← memory usage instructions
 ├── <category>/         ← one folder per domain (cours/, games/, system/, …)
 │   └── <note>.md       ← kebab-case filename, frontmatter with date + status
@@ -55,18 +58,19 @@ The entire system works with three folders :
 
 ~/                      ← symlinks pointing to the above
 ├── CLAUDE.md           → ~/dotfiles/CLAUDE.md
-├── CONSTRUCT.md        → ~/dotfiles/CONSTRUCT.md
-├── CONF.md             → ~/context/CONF.md
+├── CLAUDE.local.md     → ~/context/CLAUDE.local.md
 └── PROJECTS.md         → ~/context/PROJECTS.md
 
 ~/.claude/skills/       ← one symlink per skill
 ├── lang-skill-builder  → ~/dotfiles/skills/lang-skill-builder
 ├── lang-skill-updater  → ~/dotfiles/skills/lang-skill-updater
 ├── memory-write        → ~/dotfiles/skills/memory-write
+├── setup               → ~/dotfiles/skills/setup
 └── lang-<language>     → ~/context/skills/lang-<language>
 
 ~/.claude/
 ├── settings.json       → ~/dotfiles/claude/settings.json
+├── settings.local.json → ~/context/settings.local.json
 └── agents              → ~/dotfiles/claude/agents
 ```
 
@@ -84,41 +88,26 @@ The symlinks are what Claude Code reads. The repos are what git tracks.
 # 1. Clone this repo
 git clone git@github.com:conspicio-ok/agent-dotfiles.git ~/dotfiles
 
-# 2. Symlink to home
-ln -sf ~/dotfiles/CLAUDE.md ~/CLAUDE.md
-ln -sf ~/dotfiles/CONSTRUCT.md ~/CONSTRUCT.md
-
-# 3. Symlink generic skills
-mkdir -p ~/.claude/skills
-for d in ~/dotfiles/skills/*/; do ln -sfn "$d" ~/.claude/skills/; done
-```
-
-Claude Code settings and subagents:
-
-```bash
-ln -sfn ~/dotfiles/claude/settings.json ~/.claude/settings.json
-ln -sfn ~/dotfiles/claude/agents ~/.claude/agents
-```
-
-An existing regular `~/.claude/settings.json` or `~/.claude/agents` is replaced: back it up first. Plugins declared in `settings.json` are installed from their marketplaces after a confirmation at first launch. Login is per machine.
-
-If using a private context repo:
-
-```bash
-# 4. Clone context
+# 2. Optional: clone your private repos (backup / multi-machine sync)
 git clone git@github.com:<you>/context.git ~/context
+git clone git@github.com:<you>/memory.git ~/memory
 
-# 5. Symlink context files to home
-ln -sf ~/context/CLAUDE.local.md ~/CLAUDE.local.md
-ln -sf ~/context/CONF.md ~/CONF.md
-ln -sf ~/context/PROJECTS.md ~/PROJECTS.md
-for d in ~/context/skills/*/; do ln -sfn "$d" ~/.claude/skills/; done
-
-# 6. Symlink Claude Code settings
-ln -sf ~/context/settings.local.json ~/.claude/settings.local.json
+# 3. Expose the setup skill, then run it from Claude Code
+mkdir -p ~/.claude/skills
+ln -sfn ~/dotfiles/skills/setup ~/.claude/skills/setup
+claude
+> /setup
 ```
 
-Without the context repo, create the files manually — see `CONSTRUCT.md`.
+`/setup` creates `~/context` and `~/memory` if absent, builds every missing file from `skills/setup/templates/` (`CLAUDE.local.md`, `PROJECTS.md`, `settings.local.json`, memory `TEMPLATE.md`, `README.md`, `backlog.md`), fills `~/memory/<hostname>.md` from the live system, and creates all symlinks shown above (home files, `~/.claude/settings.json`, `agents`, `settings.local.json`, one link per skill in `dotfiles/skills` and `context/skills`).
+
+Re-running is safe and is how updates are applied:
+- existing files are never overwritten; missing `CLAUDE.local.md` sections and template diffs are proposed, applied only after approval;
+- `<hostname>.md` entries are refreshed against the live system, the old value kept as history;
+- new skills get linked, dangling skill links are pruned;
+- a regular file or a link to another target where a symlink is expected is reported, never replaced without approval — back up an existing `~/.claude/settings.json` or `~/.claude/agents` first.
+
+Plugins declared in `settings.json` are installed from their marketplaces after a confirmation at first launch. Login is per machine.
 
 ## Disabling Claude Code auto-memory
 
@@ -142,6 +131,6 @@ Before disabling, check `~/.claude/projects/<project>/memory/MEMORY.md` and migr
 | Behavioral feedback, errors | `~/context/CLAUDE.local.md` — *Erreurs à ne pas reproduire* |
 | Coding conventions | `~/context/skills/lang-<language>/SKILL.md` (via `lang-skill-updater`) |
 | Active projects | `~/context/PROJECTS.md` |
-| Knowledge, decisions, notes | `~/memory/<category>/<note>.md` (see `CONSTRUCT.md`) |
+| Knowledge, decisions, notes | `~/memory/<category>/<note>.md` (copy of `TEMPLATE.md`) |
 
 Entries already present in the destination files can be discarded.

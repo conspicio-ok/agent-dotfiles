@@ -9,7 +9,7 @@ Arborescence : `memory/<categorie>/<note>.md`, kebab-case, date dans le frontmat
 
 ## Créer une note
 
-`cp ~/memory/TEMPLATE.md ~/memory/<categorie>/<note>.md` (créer le dossier si absent), puis remplir le frontmatter. Jamais de note créée de zéro. Si `TEMPLATE.md` est absent, le créer depuis `~/CONSTRUCT.md` avant toute autre opération.
+`cp ~/memory/TEMPLATE.md ~/memory/<categorie>/<note>.md` (créer le dossier si absent), puis remplir le frontmatter. Jamais de note créée de zéro. Si `TEMPLATE.md` est absent, le créer avec le skill `setup` avant toute autre opération.
 
 ## Passer une note au statut propre
 

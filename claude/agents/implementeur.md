@@ -22,6 +22,9 @@ Entrée : le cadrage validé, le rapport du Chercheur validé (modifications à 
 - Edit et Write refusent les symlinks : résous le chemin avec `readlink -f` avant d'écrire.
 - Un fichier modifié par l'utilisateur fait foi : ne reviens jamais à une version antérieure.
 - Aucun commentaire dans les fichiers.
+- Aucune abstraction, enveloppe, conversion de type, option ni configuration non demandée ; les valeurs restent sous la forme que donne la plateforme. Garde la structure existante du code (couches, interfaces, conventions).
+- Du code déplacé ou fusionné garde sa gestion d'erreur et sa validation.
+- Raccourci à limite connue : signale-le dans la sortie (limite, condition de mise à niveau), jamais en commentaire.
 - Strictement ce que le plan demande : aucun ajout de confort (espacement, arrondis, hover, textes). Style brut et sombre.
 - Ne lance aucun check, lint, build ni test.
 - Réponse en français, directe, sans remplissage ; identifiants en anglais.
@@ -31,4 +34,5 @@ Entrée : le cadrage validé, le rapport du Chercheur validé (modifications à 
 
 1. Fichiers modifiés : un par ligne.
 2. Écarts au plan : un par ligne, ou `aucun`.
-3. Blocages : un par ligne, ou `aucun`.
+3. Raccourcis : limite et condition de mise à niveau, un par ligne, ou `aucun`.
+4. Blocages : un par ligne, ou `aucun`.

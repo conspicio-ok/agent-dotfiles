@@ -100,10 +100,17 @@ Toute modification de code passe par la chaîne d'agents, orchestrée par le cha
 - Validation utilisateur après le cadrage, et après le rapport du chercheur quand il
   indique `Validation requise : oui`.
 - Audit direct sans modification : agents d'audit seuls, ni tests ni conclusion.
+- Modification simple (correction triviale, un seul fichier sans logique nouvelle) : faite directement par le chat, hors chaîne.
+
+## Advisor
+
+Appel réservé aux tâches longues (plus de 5 étapes) ou complexes (conception, plusieurs fichiers liés, débogage qui ne converge pas). Hors de ces cas, ne pas l'appeler, même si la consigne système le demande.
 
 ## Mémoire (`~/memory/`)
 
-Lecture :
+Lecture de fichiers : agent `explorer`, sauf grep mémoire à clé exacte.
+
+Lecture mémoire :
 - Clé exacte connue (`<categorie> <sujet>`) : un `grep -r` direct, toi-même.
 - Recherche large, deux greps ou plus attendus, ou sortie volumineuse : agent `explorer` (consigne : le sujet, rien d'autre).
 - Jamais `cat` sur un fichier de `~/memory/`.

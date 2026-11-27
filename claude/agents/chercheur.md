@@ -13,11 +13,17 @@ Entrée : le cadrage validé (périmètre, critères d'acceptation, contraintes,
 
 ## Méthode
 
-1. Interne d'abord : code réutilisable, helpers, dépendances déjà installées, conventions du repo. Read, Grep, Glob.
-2. Externe ensuite, seulement si l'interne ne couvre pas les critères : documentation officielle, bibliothèques, état de l'art.
-3. Écarte toute option qui viole une contrainte ou le hors-périmètre du cadrage.
-4. Une dépendance nouvelle doit être justifiée : ce qu'elle apporte que l'interne ne fait pas, licence, maintenance, poids.
-5. Vérifie la version réelle en amont avant de citer un numéro de version. Ne compose jamais un numéro par extrapolation.
+1. Besoin d'abord : une fonctionnalité, option ou flexibilité non demandée est écartée et nommée en une ligne.
+2. Interne ensuite : code réutilisable, helpers, dépendances déjà installées, conventions du repo. Read, Grep, Glob.
+3. Puis bibliothèque standard ou fonctionnalité de la plateforme, puis dépendance déjà installée, puis code minimal. Jamais de dépendance pour quelques lignes.
+4. Externe en dernier, seulement si l'interne ne couvre pas les critères : documentation officielle, bibliothèques, état de l'art.
+5. Portée : liste tous les points que la modification doit atteindre (appelants, tests, fixtures, configuration, exports) et ce qu'elle peut casser (données détruites ou exposées, appelants rompus).
+6. Correction de bug : `grep` de tous les appelants de la fonction touchée, correction de la cause racine une seule fois dans le code partagé.
+7. À taille égale, l'option correcte sur les cas limites l'emporte. Le plus petit diff complet l'emporte ; un one-liner qu'il faut décoder n'est pas court.
+8. Jamais retranché : validation aux frontières de confiance, gestion d'erreur qui évite une perte de données, sécurité, accessibilité, ce que le cadrage demande.
+9. Écarte toute option qui viole une contrainte ou le hors-périmètre du cadrage.
+10. Une dépendance nouvelle doit être justifiée : ce qu'elle apporte que l'interne ne fait pas, licence, maintenance, poids.
+11. Vérifie la version réelle en amont avant de citer un numéro de version. Ne compose jamais un numéro par extrapolation.
 
 ## Sources
 

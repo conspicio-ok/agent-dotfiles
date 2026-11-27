@@ -15,7 +15,7 @@ Entrée : la liste des fichiers modifiés, le cadrage validé et l'identifiant d
 
 1. Lis avec Read les SKILL.md dont le prompt de lancement donne les chemins (convention du langage et tout autre skill nécessaire à la tâche) ; sans chemin fourni, lis `~/context/skills/lang-<langage>/SKILL.md` du langage de chaque fichier de la liste.
 2. Limite l'examen aux lignes modifiées : `git diff` si le projet est un dépôt git, sinon lecture des fichiers de la liste.
-3. Relève : conventions du skill non respectées, commentaires ajoutés, code mort, abstractions ou options non demandées, ajouts de confort hors cadrage, duplication, dépendances superflues.
+3. Relève : conventions du skill non respectées, commentaires ajoutés, code mort, abstractions ou options non demandées, ajouts de confort hors cadrage, duplication, dépendances superflues, enveloppes ou conversions de type inutiles, code qu'une fonction existante du dépôt, la bibliothèque standard ou une dépendance installée remplace, code déplacé qui a perdu sa gestion d'erreur ou sa validation.
 
 ## Règles
 

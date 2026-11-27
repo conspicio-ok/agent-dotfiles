@@ -7,10 +7,12 @@
   "model": "sonnet",
   "disableClaudeAiConnectors": true,
   "syncClaudeAiSkills": false,
-  "claudeMdExcludes": ["/home/conspicio/dotfiles/CLAUDE.md", "/home/conspicio/context/CLAUDE.local.md"],
+  "claudeMdExcludes": [
+    "/home/conspicio/dotfiles/CLAUDE.md",
+    "/home/conspicio/context/CLAUDE.local.md"
+  ],
   "env": {
     "CLAUDE_CODE_PLUGIN_DIRS": "~/dotfiles/claude/mods/agents-board",
-    "PONYTAIL_SUBAGENT_MATCHER": "^(chercheur|implementeur|tests)$",
     "CLAUDE_CODE_DISABLE_ARTIFACT": "1"
   },
   "hooks": {
@@ -37,31 +39,6 @@
       }
     ]
   },
-  "enabledPlugins": {
-    "i-have-adhd@i-have-adhd": true,
-    "ponytail@ponytail": true,
-    "obsidian@obsidian-skills": true
-  },
-  "extraKnownMarketplaces": {
-    "i-have-adhd": {
-      "source": {
-        "source": "github",
-        "repo": "ayghri/i-have-adhd"
-      }
-    },
-    "ponytail": {
-      "source": {
-        "source": "github",
-        "repo": "DietrichGebert/ponytail"
-      }
-    },
-    "obsidian-skills": {
-      "source": {
-        "source": "github",
-        "repo": "kepano/obsidian-skills"
-      }
-    }
-  },
   "effortLevel": "medium",
   "modelSettings": {
     "claude-opus-5": {
@@ -74,13 +51,6 @@
   "advisorModel": "opus",
   "promptSuggestionEnabled": false,
   "awaySummaryEnabled": false,
-  "pluginConfigs": {
-    "ponytail@ponytail": {
-      "options": {
-        "ledger": false
-      }
-    }
-  },
   "tui": "fullscreen",
   "theme": "dark-ansi",
   "switchModelsOnFlag": false,

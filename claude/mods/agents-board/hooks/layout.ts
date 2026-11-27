@@ -38,6 +38,53 @@ export function levelsOf(list: Task[]): Task[][] {
   return columns.filter(Boolean)
 }
 
+export function reducedOf(columns: Task[][]): Task[][] {
+  const levelById = new Map(columns.flatMap((column, index) => column.map(task => [task.id, index] as const)))
+  const byId = new Map(columns.flat().map(task => [task.id, task]))
+  const memo = new Map<string, Set<string>>()
+
+  const forwardOf = (task: Task, level: number) =>
+    [...new Set(task.deps)].filter(dep => {
+      const depLevel = levelById.get(dep)
+
+      return depLevel !== undefined && depLevel < level
+    })
+
+  const ancestorsOf = (id: string): Set<string> => {
+    const known = memo.get(id)
+
+    if (known !== undefined) {
+      return known
+    }
+
+    const ancestors = new Set<string>()
+    const task = byId.get(id)
+
+    if (task !== undefined) {
+      for (const dep of forwardOf(task, levelById.get(id) ?? 0)) {
+        ancestors.add(dep)
+
+        for (const ancestor of ancestorsOf(dep)) {
+          ancestors.add(ancestor)
+        }
+      }
+    }
+
+    memo.set(id, ancestors)
+
+    return ancestors
+  }
+
+  return columns.map((column, level) =>
+    column.map(task => {
+      const forward = forwardOf(task, level)
+      const deps = forward.filter(dep => !forward.some(other => other !== dep && ancestorsOf(other).has(dep)))
+
+      return { ...task, deps }
+    }),
+  )
+}
+
 export function layoutOf(columns: Task[][]) {
   const levelById = new Map(columns.flatMap((column, index) => column.map(task => [task.id, index] as const)))
   const nodes: Node[][] = columns.map(column => column.map(task => ({ id: task.id, isPass: false, parents: [] })))

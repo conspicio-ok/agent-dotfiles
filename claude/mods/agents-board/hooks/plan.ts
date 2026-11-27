@@ -2,7 +2,7 @@ import type { Task } from '../types'
 
 import { TEST_TASK, TESTS_GROUP } from './constants'
 import { gutterLength } from './gutter'
-import { layoutOf, levelsOf } from './layout'
+import { layoutOf, levelsOf, reducedOf } from './layout'
 import { newTask } from './tasks'
 
 const DONE_STATE = { color: '#2f4a3a', mark: '✓' }
@@ -46,7 +46,7 @@ export function planOf(graph: Task[], active: Set<string>) {
   if (members.length < 3) {
     const columns = levelsOf(graph)
 
-    return { graph, columns, stateOf: statesOf(graph, active), ...layoutOf(columns) }
+    return { graph, columns, stateOf: statesOf(graph, active), ...layoutOf(reducedOf(columns)) }
   }
 
   const memberIds = new Set<string>()
@@ -99,7 +99,7 @@ export function planOf(graph: Task[], active: Set<string>) {
   }
   const columns = levelsOf(shown)
 
-  return { graph: shown, columns, stateOf, ...layoutOf(columns) }
+  return { graph: shown, columns, stateOf, ...layoutOf(reducedOf(columns)) }
 }
 
 export function labelWidth(task: Task): number {

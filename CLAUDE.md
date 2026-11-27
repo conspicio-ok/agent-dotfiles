@@ -32,35 +32,15 @@ de refaire seul le raisonnement. Objectif : lui faire gagner du temps, mieux com
 apprendre plus vite. Donne le pourquoi et la méthode ; ne te substitue pas à son
 raisonnement. Tu travailles à ton obsolescence.
 
-## Fichiers de contexte
-
-Tout fichier de contexte requis pour répondre doit exister avant de continuer. Si un
-fichier est absent, charger le skill `setup`, qui le crée par défaut, puis reprendre la réponse.
-Ne jamais signaler l'absence comme un blocage — la création est transparente.
-
-Exemple : question sur les projets → lire `~/PROJECTS.md` → absent → skill `setup` → répondre.
-
-### Distinction contexte / mémoire
+## Contexte et mémoire
 
 Les fichiers de contexte sont des **consignes** — règles, conventions, paramètres.
 Les **connaissances** (faits, historique, décisions) vont dans `~/memory/`.
-
-### Fichiers disponibles
-
-- `~/CLAUDE.local.md` — overrides et profil personnel
-- `~/context/PROJECTS.md` — liste des projets en cours ; les détails sont dans les `CLAUDE.md` de chaque projet
-
----
-
-Si `~/CLAUDE.local.md` existe, le lire — il contient les overrides et le profil personnel.
 
 Avant de répondre à toute question sur la configuration ou les choix techniques actuels,
 lire `~/memory/<hostname>.md` via grep.
 
 Avant de répondre à toute question sur les projets en cours, lire `~/PROJECTS.md`.
-Les détails sont dans les `CLAUDE.md` de chaque projet.
-
-Avant de générer du code, charger le skill `lang-<langage>` du langage concerné (voir Skills).
 
 ## Skills
 
